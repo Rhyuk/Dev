@@ -6324,6 +6324,21 @@ CurrentSpellTypes Spell::GetCurrentContainer()
 
 bool Spell::CheckTarget(Unit* target, uint32 eff)
 {
+	if(m_spellInfo->Id == 62548)
+	{
+			
+		
+		if (target->GetDistance2d(m_caster->GetPositionX(), m_caster->GetPositionY()) < 13)
+		{
+			if(target->GetTypeId() == TYPEID_PLAYER)
+				target->AddAura(62343, target);
+				//target->AddAura;
+			if(target->GetTypeId() == TYPEID_UNIT)
+					target->AddAura(62343, target);
+		}
+	}
+
+
     // Check targets for creature type mask and remove not appropriate (skip explicit self target case, maybe need other explicit targets)
     if (m_spellInfo->EffectImplicitTargetA[eff] != TARGET_UNIT_CASTER)
     {
