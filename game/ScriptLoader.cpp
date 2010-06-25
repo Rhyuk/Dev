@@ -23,6 +23,8 @@
 #ifdef DO_SCRIPTS
 //custom
 
+void AddSC_add_ignis();
+
 //AllInOne
 void AddSC_AllInOne();
 
@@ -548,6 +550,7 @@ void AddScripts()
 #ifdef DO_SCRIPTS
 
     //custom
+	AddSC_add_ignis();
 
     //guildhouse
     AddSC_guildmaster();
