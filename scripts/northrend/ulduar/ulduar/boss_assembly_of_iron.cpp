@@ -438,7 +438,7 @@ struct boss_runemaster_molgeimAI : public ScriptedAI
                     Unit *pTarget = DoSelectLowestHpFriendly(60);
                     if (!pTarget || (pTarget && !pTarget->isAlive()))
                         pTarget = me;
-					me->SummonCreature(33705, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ() , 0 , TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 60000);
+					me->SummonCreature(33705, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ() , 0 , TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 60000); // Fais pop la rune
 				    events.ScheduleEvent(EVENT_RUNE_OF_POWER, 60000);
                     break;
                 }
@@ -483,11 +483,12 @@ struct boss_stormcaller_brundirAI : public ScriptedAI
 		phase = 1;
         boss_phase = 1;
 		RespawnCreature(pInstance,me);
+		overload = false;
     }
 	int boss_phase;
     EventMap events;
     ScriptedInstance* pInstance;
-  
+	bool overload ;
 
     void EnterCombat(Unit* /*who*/)
     {
@@ -569,6 +570,11 @@ struct boss_stormcaller_brundirAI : public ScriptedAI
         }
 
         events.Update(diff);
+		if(!me->HasAura(SPELL_OVERLOAD) && overload == true) 
+		{
+			DoCast(63480);
+			overload = false;
+		}
 
         while (uint32 eventId = events.ExecuteEvent())
         {
@@ -585,8 +591,7 @@ struct boss_stormcaller_brundirAI : public ScriptedAI
                     break;
                 case EVENT_OVERLOAD:
                     DoCast(SPELL_OVERLOAD);
-					if(!me->HasAura(SPELL_OVERLOAD))
-						DoCast(63480);
+					overload = true;
 					events.ScheduleEvent(EVENT_OVERLOAD, urand(60000,125000));
                     break;
                 case EVENT_LIGHTNING_WHIRL:
