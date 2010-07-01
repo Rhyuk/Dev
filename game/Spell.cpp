@@ -6281,7 +6281,10 @@ void Spell::UpdatePointers()
 
 bool Spell::CheckTargetCreatureType(Unit* target) const
 {
-    uint32 spellCreatureTargetMask = m_spellInfo->TargetCreatureType;
+	if(m_spellInfo->Id == 61920)
+		target->AddAura(61920, target);
+	
+	uint32 spellCreatureTargetMask = m_spellInfo->TargetCreatureType;
 
     // Curse of Doom & Exorcism: not find another way to fix spell target check :/
     if (m_spellInfo->SpellFamilyName == SPELLFAMILY_WARLOCK && m_spellInfo->Category == 1179)
