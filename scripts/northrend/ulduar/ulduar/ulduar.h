@@ -39,10 +39,9 @@ enum eTypes
     TYPE_ALGALON                = 13,
 
     DATA_STEELBREAKER           = 20,
-    DATA_MOLGEIM                = 21,
-    DATA_BRUNDIR                = 22,
-    DATA_RUNEMASTER_MOLGEIM     = 23,
-    DATA_STORMCALLER_BRUNDIR    = 24,
+    DATA_BRUNDIR                = 21,
+    DATA_MOLGEIM				= 22,
+    
 
     NPC_LEVIATHAN               = 33113,
     NPC_IGNIS                   = 33118,
